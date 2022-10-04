@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style type="text/css">
+	@font-face {
+	    font-family: 'KOTRALEAP';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/KOTRALEAP.woff2') format('woff2');
+	    font-weight: normal;
+	    font-style: normal;
+	}
+		
+	@font-face {
+    font-family: 'KOTRAHOPE';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/KOTRAHOPE.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+		body{
+			background-image: url(earth.jpg);
+			background-size: cover;
+			background-repeat: no-repeat;
+		}
+
+		.rat{
+			width: 60px;
+			height: 60px;
+		
+			position: absolute;
+		}
+
+
+		.timer{
+			width: 1000px;
+			height: 400px;
+			position: absolute;
+		    top: 75%;
+		    left: 50%;
+		    transform: translate(-50%, -50%);
+			color: white;
+			text-align: center;
+			line-height: 34pt;
+			font-size: 20pt;
+			font-family: 'KOTRALEAP';
+
+		}
+		#dateDiv{
+			background: black;
+			color: white;
+			text-align: center;
+			line-height: 34pt;
+			font-size: 20pt;
+			font-family: 'KOTRALEAP';
+		}
+
+
+		.misson{
+			text-align: center;
+			color: white;
+			font-family: 'KOTRAHOPE';
+			margin-top: 80px;
+			font-size: 24pt;
+
+		}
+
+		.bomb{
+			margin-bottom: 20px;
+			width: 300px;
+		}
+
+	</style>
+</head>
+<body id="backImg">
+	<h1 class="misson">지구가 아파요! 쓰레기를 치워주세요</h1>
+	<div class="timer">
+	<div  id="dateDiv"></div>
+	<img class="bomb" src="bomb.png">
+	</div>
+
+	<script type="text/javascript">
+	// 	let은 지역과 전역을 구분함, var은 구분을 잘 안함.
+		let timer = setInterval(ddd, 100);
+		let t = 0;
+		let score = 0;
+
+
+		function ddd(){
+			t++; 
+			// 실행
+			makeRat();
+			var dateDivBack = document.getElementsByClassName("timer")[0];
+			dateDivBack.style.display = "none";
+			if(t == 50){
+				clearInterval(timer);
+				alert("지구는 살 수 없는 환경이 되었어요");
+				document.getElementById('backImg').style.backgroundImage= "url(earth2.jpg)"
+
+				var misson = document.getElementsByClassName("misson")[0];
+				misson.innerHTML = "막을 수 없는 쓰레기의 양" +"<br>"+ "우리의 현실입니다";
+				misson.style.fontSize = "48" + "pt";
+				misson.style.fontFamily = "KOTRALEAP";
+
+				dateDivBack.style.display = "block";
+				// var dateDiv = document.createElement("div");
+				// dateDiv.className = "timer";
+				// document.body.appendChild(dateDiv);
+				
+				var dday = new Date("September 04, 2029, 0:00:00").getTime();
+
+			setInterval(function() {
+				  var today = new Date().getTime();
+				  var gap = dday - today;
+				  var day = Math.ceil(gap / (1000 * 60 * 60 * 24));
+				  var hour = Math.ceil((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+				  var min = Math.ceil((gap % (1000 * 60 * 60)) / (1000 * 60));
+				  var sec = Math.ceil((gap % (1000 * 60)) / 1000);
+
+				 document.getElementById("dateDiv").innerHTML = "위기의 날까지 " + day + "일 " + hour + "시간 " + min + "분 " + sec + "초 남았습니다.";
+			}, 1000);
+
+			}
+			
+			
+			// 내 함수 생성
+		function makeRat(){
+			var t = document.createElement("img");
+			t.src = "trash1.png";
+			t.className = "rat";
+			t.Id = "rat" + t;
+			let a = Math.random()*window.innerWidth - 50;
+			let b = Math.random()*window.innerHeight - 50;
+			t.style.left = a + "px";
+			t.style.top = b + "px";
+			document.body.appendChild(t);
+			setTimeout(re,3000);
+			function re(){
+				var a = document.getElementById("rat" + t);
+				a.remove();
+			}
+
+			t.onclick = function(){
+				this.remove();
+				// score++; display.innerHTML = score;
+			}
+
+		}
+
+		}
+		
+
+	// 리턴함수는 변수선언 필요
+		function makeDate(){
+
+
+		var d = new Date();
+		var month = d.getMonth();
+		var yoil = d.getDay();
+		var day = d.getDate();
+		
+		var output = "위기의 날까지 " + month + "월 " + day + "일 남았습니다.";
+		dateDiv.innerHTML = output;
+		dateDiv.appendChild(output);
+
+	}
+
+
+	function yoiltrans(num){
+		var num2;
+		if(num == "1"){num2 = "월"}
+		else if(num == "2"){num2 = "화"}
+		else if(num == "3"){num2 = "수"}
+		else if(num == "4"){num2 = "목"}
+		else if(num == "5"){num2 = "금"}
+		else if(num == "6"){num2 = "토"}
+		else if(num == "0"){num2 = "일"}
+		return num2;
+	}
+
+	</script>
+</body>
+</html>
